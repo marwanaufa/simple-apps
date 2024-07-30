@@ -2,16 +2,14 @@ const express = require("express");
 const mysql = require("mysql");
 const app = express();
 const path = require("path");
-const helmet = require("helmet");
 require("dotenv").config();
-
-app.use(helmet.hidePoweredBy());
 
 // Import Middleware
 const logger = require("./middleware/logger");
 app.use(logger);
 const connection = require("./middleware/db_connect");
 
+app.disable("x-powered-by");
 // Dashboard
 app.use("/", express.static(path.join(__dirname, "public")));
 
